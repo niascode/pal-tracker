@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryTimeEntryRepository {
+public class InMemoryTimeEntryRepository implements TimeEntryRepository{
 
     private Map<Long,TimeEntry> timeEntryList;
 
@@ -30,8 +30,8 @@ public class InMemoryTimeEntryRepository {
         return timeEntry;
     }
 
-    public TimeEntry find(TimeEntry id) {
-        return timeEntryList.get(id.getId());
+    public TimeEntry find(long id) {
+        return timeEntryList.get(id);
     }
 
 
@@ -39,20 +39,18 @@ public class InMemoryTimeEntryRepository {
         return new ArrayList<TimeEntry>(timeEntryList.values());
     }
 
-    public TimeEntry update(Long id, TimeEntry timeEntry) {
+    public TimeEntry update(long id, TimeEntry timeEntry) {
         TimeEntry foundTimeEntry = this.find(id);
         if (foundTimeEntry==null){
             return null;
         }
+        timeEntry.setId(id);
         timeEntryList.replace(id,timeEntry);
         return this.find(id);
     }
 
-    public void delete(Long id) {
+        public void delete(long id) {
         timeEntryList.remove(id);
     }
 
-    public TimeEntry find(long timeEntryId) {
-        return timeEntryList.get(timeEntryId);
-    }
 }

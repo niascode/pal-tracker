@@ -1,5 +1,7 @@
 package io.pivotal.pal.tracker;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -8,10 +10,46 @@ public class TimeEntry {
         this.id = id;
     }
 
-    private long id;
-    private long projectId;
+    //@JsonProperty
     private long userId;
     private LocalDate date;
+    private int hours;
+    private long id;
+    private long projectId;
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -30,7 +68,7 @@ public class TimeEntry {
         return Objects.hash(id, projectId, userId, date, hours);
     }
 
-    private int hours;
+
 
     public TimeEntry(long projectId, long userId, LocalDate date, int hour) {
         this.projectId = projectId;
@@ -47,12 +85,7 @@ public class TimeEntry {
         this.hours = hour;
     }
 
-    public TimeEntry(Object id, long projectId, long userId, LocalDate date, int hour) {
-        this.projectId = projectId;
-        this.userId = userId;
-        this.date = date;
-        this.hours = hour;
-    }
+
 
     //empty constructor
     public TimeEntry() {
